@@ -39,7 +39,12 @@ protected:
     const Type type;                    //!< The type of the move
     const unsigned short power;         //!< The power of the move (0 - 255)
     const unsigned short accuracy;      //!< The accuracy of the move (0 - 100)
-    const unsigned short maxPp;         //!< The accuracy of the move (0 - 100)
+    const unsigned short maxPp;
+public:
+    unsigned short getMaxPp() const;
+
+protected:
+    //!< The accuracy of the move (0 - 100)
 
     const unsigned short priority;      //!< The priority of the move (from 0 to 6)
 

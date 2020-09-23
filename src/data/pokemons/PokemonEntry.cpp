@@ -30,8 +30,14 @@ ostream &operator<<(ostream &os, const PokemonEntry &entry) {
 }
 
 
-bool PokemonEntry::canLearnMove(const MoveEntry* moveEntry) {
+bool PokemonEntry::canLearnMove(const MoveEntry* moveEntry) const {
     return movePool.find(moveEntry->id) != movePool.end();
+}
+
+list<MoveEntry *> PokemonEntry::getListMove() const {
+    list<MoveEntry *> res{};
+    for(auto it: movePool) res.push_back(it.second);
+    return res;
 }
 
 

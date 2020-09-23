@@ -19,3 +19,7 @@ ostream &operator<<(ostream &os, const MoveEntry &entry) {
 }
 
 MoveEntry::MoveEntry() : id(MoveEntry::ID_COUNTER), name(""), description(""), category(PHYSICAL), type(NEUTRAL), power(1), accuracy(100), maxPp(25), priority(0){}
+
+unsigned short MoveEntry::getMaxPp() const {
+    return maxPp;
+}

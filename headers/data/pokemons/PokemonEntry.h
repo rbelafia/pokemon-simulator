@@ -16,6 +16,8 @@ using namespace std;
 
 class PokemonEntry {
     friend class PokemonDex;
+    friend class Pokemon;
+    friend ostream;
 
 public:
     static unsigned int ID_COUNTER;
@@ -43,7 +45,9 @@ public:
                           const Statistics &baseStatistics = {100, 100, 100, 100, 100, 100},
                           const list<MoveEntry *> &movePool = {}, float captureRate = 1);
 
-    bool canLearnMove(const MoveEntry* moveEntry);
+    bool canLearnMove(const MoveEntry* moveEntry) const;
+
+    list<MoveEntry*> getListMove() const;
 
     friend ostream &operator<<(ostream &os, const PokemonEntry &entry);
 };
