@@ -7,7 +7,7 @@
 
 MoveDex* MoveDex::INSTANCE = nullptr;
 
-MoveDex::MoveDex() : entries(map<unsigned int, MoveEntry*>()) {
+MoveDex::MoveDex() : entries(map<unsigned int, const MoveEntry*>()) {
     CsvReader reader("../csv/moves_compact.csv", ";");
 
     auto data_list = reader.getData();
@@ -31,7 +31,7 @@ MoveDex *MoveDex::getInstance() {
     return INSTANCE;
 }
 
-MoveEntry *MoveDex::getEntry(const unsigned int index) {
+const MoveEntry *MoveDex::getEntry(const unsigned int index) {
     return entries[index];
 }
 

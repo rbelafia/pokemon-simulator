@@ -4,6 +4,7 @@
 #include "headers/data/pokemons/PokemonEntry.h"
 #include "headers/data/pokemons/PokemonDex.h"
 #include "headers/entities/pokemons/Pokemon.h"
+#include "headers/entities/trainer/Trainer.h"
 
 unsigned int MoveEntry::ID_COUNTER = 1;
 unsigned int PokemonEntry::ID_COUNTER = 1;
@@ -22,9 +23,13 @@ int main() {
     cout << pokemon_dex->getEntry(1)->canLearnMove(move_dex->getEntry(76)) << endl;
     cout << pokemon_dex->getEntry(4)->canLearnMove(move_dex->getEntry(76)) << endl;
 
-    Pokemon charizard = Pokemon(pokemon_dex->getEntry(6), HARDY, 50);
+    //Pokemon charizard = Pokemon(pokemon_dex->getEntry(6), HARDY, 50);
 
-    cout << charizard << endl;
+    //cout << charizard << endl;
+
+    Trainer trainer = Trainer("Georges");
+
+    cout << trainer << endl;
 
     return 0;
 }

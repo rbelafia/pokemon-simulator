@@ -12,7 +12,7 @@ class PokemonDex {
 private:
     static PokemonDex* INSTANCE;
 
-    map<unsigned int, PokemonEntry*> entries;
+    map<unsigned int, const PokemonEntry*> entries;
 
     PokemonDex();
 public:
@@ -22,9 +22,12 @@ public:
 
     static PokemonDex* getInstance();
 
-    PokemonEntry* getEntry(unsigned int index);
+    const PokemonEntry* getEntry(unsigned int index) const;
 
     friend ostream &operator<<(ostream &os, const PokemonDex &dex);
+
+    virtual ~PokemonDex();
+
 };
 
 

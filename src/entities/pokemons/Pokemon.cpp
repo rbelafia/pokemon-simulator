@@ -4,6 +4,7 @@
 
 #include <cmath>
 #include "../../../headers/entities/pokemons/Pokemon.h"
+#include "../../../headers/data/pokemons/PokemonDex.h"
 
 unsigned int computePv(unsigned short base, unsigned short iv, unsigned short ev, unsigned short level) {
     return (unsigned short)(floor((2 * base + iv  + (unsigned short)floor(ev/4)) * level / 100)) + level + 10;
@@ -48,18 +49,16 @@ Pokemon::Pokemon(const PokemonEntry *entry, const Nature nature, unsigned short 
                          computeNature(SPEED, nature))
     };
 
-    list<MoveEntry*> pool = entry->getListMove();
+
+    list<const MoveEntry*> pool = entry->getListMove();
+
     for (int i = 0; i < 4; ++i) {
         auto it = pool.begin();
-        srand((unsigned) time(0));
-        int rand_number = rand() % pool.size();
+        int rand_number = (int) (rand() % pool.size());
         std::advance(it, rand_number);
-        MoveEntry* move_entry = *it;
-        moves[i] = {move_entry, move_entry->getMaxPp(), move_entry->getMaxPp()};
+        moves[i] = {*it, (*it)->getMaxPp(), (*it)->getMaxPp()};
         pool.remove(*it);
     }
-
-
 }
 
 
@@ -95,3 +94,4 @@ ostream &operator<<(ostream &os, const Pokemon &pokemon) {
     }
     return os;
 }
+

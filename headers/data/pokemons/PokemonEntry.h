@@ -22,7 +22,7 @@ class PokemonEntry {
 public:
     static unsigned int ID_COUNTER;
 private:
-    static map<unsigned int, MoveEntry*> buildMapFromList(const list<MoveEntry*>& entries);
+    static map<unsigned int, const struct MoveEntry *> * buildMapFromList(const list<const MoveEntry*>& entries);
 protected:
     const unsigned int id;
     const string name;
@@ -35,7 +35,7 @@ protected:
 
     const unsigned short baseExperience;
     const Statistics baseStatistics;
-    const map<unsigned int, MoveEntry*> movePool;
+    const map<unsigned int, const MoveEntry*>* movePool;
 
     const float captureRate;
 public:
@@ -43,11 +43,11 @@ public:
                           Type type2 = NEUTRAL,
                           float height = 0, float weight = 0, unsigned short baseExperience = 10000,
                           const Statistics &baseStatistics = {100, 100, 100, 100, 100, 100},
-                          const list<MoveEntry *> &movePool = {}, float captureRate = 1);
+                          const list<const MoveEntry *> &movePool = {}, float captureRate = 1);
 
     bool canLearnMove(const MoveEntry* moveEntry) const;
 
-    list<MoveEntry*> getListMove() const;
+    list<const MoveEntry*> getListMove() const;
 
     friend ostream &operator<<(ostream &os, const PokemonEntry &entry);
 };

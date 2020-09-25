@@ -26,7 +26,7 @@ private:
     static MoveDex* INSTANCE;
 
     //! A map which contains the move entries
-    map<unsigned int, MoveEntry*> entries;
+    map<unsigned int, const MoveEntry*> entries;
 
     //! The constructor of the class (is not callable outside of the class scope)
     MoveDex();
@@ -46,7 +46,7 @@ public:
      * \param index The index of the pokemon
      * \return A pointer to the move entry
      */
-    MoveEntry* getEntry(unsigned int index);
+    const MoveEntry* getEntry(unsigned int index);
 
     friend ostream &operator<<(ostream &os, const MoveDex &dex);
 };

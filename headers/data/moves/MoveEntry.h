@@ -23,7 +23,6 @@ using namespace std;
  * \brief Define a pokemon move
  * */
 class MoveEntry {
-    friend class Move;
     friend class MoveDex;
     friend class PokemonEntry;
 

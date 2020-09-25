@@ -7,18 +7,28 @@
 PokemonEntry::PokemonEntry(const string &name, const string &description, Type type1, Type type2, float height,
                            float weight,
                            unsigned short baseExperience, const Statistics &baseStatistics,
-                           const list<MoveEntry *> &movePool,
-                           float captureRate) : id(ID_COUNTER), name(name),
-                                                description(description), type1(type1), type2(type2), height(height), weight(weight),
-                                                baseStatistics(baseStatistics), captureRate(captureRate), baseExperience(baseExperience), movePool(buildMapFromList(movePool)) {
+                           const list<const MoveEntry *> &movePool,
+                           float captureRate) :
+                           id(ID_COUNTER),
+                           name(name),
+                           description(description),
+                           type1(type1),
+                           type2(type2),
+                           height(height),
+                           weight(weight),
+                           baseStatistics(baseStatistics),
+                           captureRate(captureRate),
+                           baseExperience(baseExperience),
+                           movePool(buildMapFromList(movePool))
+                           {
     ID_COUNTER++;
 
 }
 
-map<unsigned int, MoveEntry *> PokemonEntry::buildMapFromList(const list<MoveEntry *> &entries) {
-    map<unsigned int, MoveEntry*> result;
+map<unsigned int, const MoveEntry*>* PokemonEntry::buildMapFromList(const list<const MoveEntry *> &entries) {
+    auto* result = new map<unsigned int , const MoveEntry*>();
     for(auto* entry : entries)
-        result.insert(pair<unsigned int, MoveEntry*>(entry->id, entry));
+        result->insert(pair<unsigned int, const MoveEntry*>(entry->id, entry));
     return result;
 
 }
@@ -31,12 +41,12 @@ ostream &operator<<(ostream &os, const PokemonEntry &entry) {
 
 
 bool PokemonEntry::canLearnMove(const MoveEntry* moveEntry) const {
-    return movePool.find(moveEntry->id) != movePool.end();
+    return movePool->find(moveEntry->id) != movePool->end();
 }
 
-list<MoveEntry *> PokemonEntry::getListMove() const {
-    list<MoveEntry *> res{};
-    for(auto it: movePool) res.push_back(it.second);
+list<const MoveEntry *> PokemonEntry::getListMove() const {
+    list<const MoveEntry *> res{};
+    for(auto it: *movePool) res.push_back(it.second);
     return res;
 }
 

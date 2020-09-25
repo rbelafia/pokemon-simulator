@@ -8,20 +8,20 @@
 
 PokemonDex* PokemonDex::INSTANCE = nullptr;
 
-PokemonDex::PokemonDex() : entries(map<unsigned int, PokemonEntry*>()) {
+PokemonDex::PokemonDex() : entries(map<unsigned int, const PokemonEntry*>()) {
     CsvReader reader("../csv/pokemons_compact.csv", ";");
     auto data_list = reader.getData();
     for (const auto& pokemon_row : data_list)
     {
         string index;
-        if (pokemon_row[0].length() <= 1) index = "00" + pokemon_row[0];
-        else if (pokemon_row[1].length() <= 2) index = "0" + pokemon_row[0];
-        else if (pokemon_row[2].length() <= 3) index = pokemon_row[0];
+        if (stoi(pokemon_row[0]) < 10) index = "00" + pokemon_row[0];
+        else if (stoi(pokemon_row[0]) <= 100) index = "0" + pokemon_row[0];
+        else index = pokemon_row[0];
 
         CsvReader reader_moves("../csv/moves/" + index + "-" + pokemon_row[1] + ".csv", ";");
         auto moves_list = reader_moves.getData();
 
-        list<MoveEntry*> moves;
+        list<const MoveEntry*> moves;
         MoveDex* move_dex = MoveDex::getInstance();
 
         for (const auto& move_row : moves_list)
@@ -53,8 +53,8 @@ PokemonDex *PokemonDex::getInstance() {
     return INSTANCE;
 }
 
-PokemonEntry *PokemonDex::getEntry(unsigned int index) {
-    return entries[index];
+const PokemonEntry* PokemonDex::getEntry(unsigned int index) const {
+    return INSTANCE->entries[index];
 }
 
 ostream &operator<<(ostream &os, const PokemonDex &dex) {
@@ -63,3 +63,5 @@ ostream &operator<<(ostream &os, const PokemonDex &dex) {
         os << entry.first << " - " << *(entry.second) << "\n";
     return os;
 }
+
+PokemonDex::~PokemonDex() = default;

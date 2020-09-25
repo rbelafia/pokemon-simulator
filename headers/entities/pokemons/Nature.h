@@ -37,9 +37,8 @@ enum Nature {
     QUIRKY
 };
 
-static std::map<Nature, std::vector<float>> converter;
-
 inline float computeNature(StatisticsName stat, Nature nature) {
+    std::map<Nature, std::vector<float>> converter;
     if (converter.empty()) {
         for (int i = 0; i < 5; ++i) {
             for (int j = 0; j < 5; ++j) {
@@ -53,16 +52,15 @@ inline float computeNature(StatisticsName stat, Nature nature) {
 
     switch (stat) {
         case ATTACK:
+            return converter[nature][0];
         case DEFENSE:
+            return converter[nature][1];
         case SPE_ATTACK:
-            return converter[nature][stat - 1];
-            break;
-        case SPE_DEFENSE:
             return converter[nature][4];
-            break;
+        case SPE_DEFENSE:
+            return converter[nature][3];
         case SPEED:
             return converter[nature][2];
-            break;
         case PV:
             return 1;
 
