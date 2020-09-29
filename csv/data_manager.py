@@ -12,7 +12,7 @@ ID_LAST_VERSION = '29'
 file_names = ['move_names.csv', 'move_flavor_text.csv', 'moves.csv',
               'pokemon_species_names.csv', 'pokemon_species_flavor_text.csv',
               'pokemon_types.csv', 'pokemon.csv', 'pokemon_stats.csv',
-              'pokemon_moves.csv']
+              'pokemon_moves.csv', 'type_efficacy.csv']
 
 os.mkdir('.tmp')
 for name in file_names:
@@ -147,5 +147,27 @@ for key, value in pokemons.items():
 
         for val in pokemon_moves[key]:
             writer.writerow([val, moves[int(val)][0]])
+
+#########################
+# Create the type table #
+#########################
+
+types = []
+for i in range(19):
+    types.append([])
+    for j in range(19):
+        types[i].append(100)
+
+with open('.tmp/.' + file_names[9]) as csv_file:
+    reader = csv.DictReader(csv_file)
+    for row in reader:
+        if int(row['damage_type_id']) < 10000:
+            types[int(row['damage_type_id'])][int(row['target_type_id'])] = int(row['damage_factor'])
+
+with open('types_compact.csv', 'w') as file:
+    writer = csv.writer(file,  delimiter=';')
+
+    for line in types:
+        writer.writerow(line)
 
 shutil.rmtree('.tmp')

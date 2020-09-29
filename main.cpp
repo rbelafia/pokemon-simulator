@@ -5,6 +5,7 @@
 #include "headers/data/pokemons/PokemonDex.h"
 #include "headers/entities/pokemons/Pokemon.h"
 #include "headers/entities/trainer/Trainer.h"
+#include "headers/fight/Fight.h"
 
 unsigned int MoveEntry::ID_COUNTER = 1;
 unsigned int PokemonEntry::ID_COUNTER = 1;
@@ -12,7 +13,7 @@ unsigned int Pokemon::ID_COUNTER = 0;
 
 int main() {
     std::cout << "Battle begin" << std::endl;
-
+    srand((unsigned) time(0));
 
     MoveDex* move_dex = MoveDex::getInstance();
     std::cout << *move_dex << std::endl;
@@ -27,9 +28,8 @@ int main() {
 
     //cout << charizard << endl;
 
-    Trainer trainer = Trainer("Georges");
-
-    cout << trainer << endl;
+    Fight fight(new Trainer("Georges"), new Trainer("Claude"));
+    fight.run();
 
     return 0;
 }

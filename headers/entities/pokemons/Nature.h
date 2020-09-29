@@ -61,7 +61,7 @@ inline float computeNature(StatisticsName stat, Nature nature) {
             return converter[nature][3];
         case SPEED:
             return converter[nature][2];
-        case PV:
+        default:
             return 1;
 
     }

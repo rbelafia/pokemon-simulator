@@ -10,7 +10,8 @@ vector<vector<string>> CsvReader::getData()
     vector<vector<string>> dataList;
     string line;
     // Iterate through each line and split the content using delimiter
-    getline(file, line);
+    if (header) getline(file, line);
+
     while (getline(file, line))
         if(!line.empty()) {
             vector<string> vec;

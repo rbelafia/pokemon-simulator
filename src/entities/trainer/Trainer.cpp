@@ -10,15 +10,15 @@ unsigned int Trainer::ID_COUNTER = 1;
 Trainer::Trainer(const string &name) : id(ID_COUNTER), name(name) {
     ID_COUNTER++;
     PokemonDex* dex = PokemonDex::getInstance();
-    srand((unsigned) time(0));
-    for (auto & i : team) {
+
+    for (int i = 0; i < 6; ++i) {
         auto rand_number = (unsigned int)((rand() % 807) + 1);
 
         const auto* pokemon_entry = dex->getEntry(rand_number);
         auto nat = (Nature)(HARDY + (rand() % 24));
         unsigned short level = rand() %100 + 1;
 
-        i = new Pokemon(pokemon_entry, nat,level);
+        team.push_back(new Pokemon(pokemon_entry, nat,level));
     }
 }
 

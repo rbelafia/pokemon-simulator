@@ -18,6 +18,7 @@ class PokemonEntry {
     friend class PokemonDex;
     friend class Pokemon;
     friend ostream;
+    friend class Fight;
 
 public:
     static unsigned int ID_COUNTER;
@@ -50,6 +51,8 @@ public:
     list<const MoveEntry*> getListMove() const;
 
     friend ostream &operator<<(ostream &os, const PokemonEntry &entry);
+
+
 };
 
 

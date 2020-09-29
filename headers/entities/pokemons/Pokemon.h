@@ -17,6 +17,7 @@
 #include <ostream>
 #include "../../data/pokemons/PokemonEntry.h"
 #include "Nature.h"
+#include "MainStatus.h"
 
 using namespace std;
 
@@ -24,6 +25,10 @@ using namespace std;
  * \brief Describe a pokemon entity
  */
 class Pokemon {
+    friend class Trainer;
+    friend class Fight;
+    friend class PokemonInFight;
+    friend ostream;
 public:
     /*! \struct Move
      * \brief Describe a move of a given pokemon
@@ -48,7 +53,6 @@ public:
 protected:
     const unsigned int id;
     const PokemonEntry* entry;
-    string nickName;
 
     const Nature nature;
 
@@ -62,7 +66,19 @@ protected:
 
     vector<Move> moves;
 
+    MainStatus mainStatus;
+
+
+    string nickName;
 public:
+    const string &getNickName() const;
+
+    unsigned short getLevel() const;
+
+    unsigned int getPv() const;
+
+    const RealStatistics &getStats() const;
+
     Pokemon(const PokemonEntry *entry, const Nature nature, unsigned short level,
             const Statistics iv = {31, 31, 31, 31, 31, 31}, const Statistics ev = {0, 0, 0, 0, 0, 0});
 

@@ -17,7 +17,7 @@ unsigned int computeStat(unsigned short base, unsigned short iv, unsigned short 
 Pokemon::Pokemon(const PokemonEntry *entry, const Nature nature, unsigned short level, const Statistics iv,
                  const Statistics ev) :
                  id(ID_COUNTER), entry(entry), nickName(entry->name), nature(nature), level(level), iv(iv), ev(ev),
-                 moves(vector<Move>(4)) {
+                 moves(vector<Move>(4)), mainStatus(CLEAN) {
     ID_COUNTER++;
     pv = computePv(entry->baseStatistics.pv, iv.pv, ev.pv, level);
 
@@ -93,5 +93,21 @@ ostream &operator<<(ostream &os, const Pokemon &pokemon) {
         os << *m.entry << " [" << m.pp << "/" << m.maxPp << "]\n";
     }
     return os;
+}
+
+const string &Pokemon::getNickName() const {
+    return nickName;
+}
+
+unsigned short Pokemon::getLevel() const {
+    return level;
+}
+
+unsigned int Pokemon::getPv() const {
+    return pv;
+}
+
+const Pokemon::RealStatistics &Pokemon::getStats() const {
+    return stats;
 }
 

@@ -11,7 +11,9 @@ enum StatisticsName {
     DEFENSE,
     SPE_ATTACK,
     SPE_DEFENSE,
-    SPEED
+    SPEED,
+    ACCURACY,
+    FLEE
 };
 
 typedef struct {

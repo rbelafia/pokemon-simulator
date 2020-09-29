@@ -15,7 +15,7 @@ PokemonDex::PokemonDex() : entries(map<unsigned int, const PokemonEntry*>()) {
     {
         string index;
         if (stoi(pokemon_row[0]) < 10) index = "00" + pokemon_row[0];
-        else if (stoi(pokemon_row[0]) <= 100) index = "0" + pokemon_row[0];
+        else if (stoi(pokemon_row[0]) < 100) index = "0" + pokemon_row[0];
         else index = pokemon_row[0];
 
         CsvReader reader_moves("../csv/moves/" + index + "-" + pokemon_row[1] + ".csv", ";");

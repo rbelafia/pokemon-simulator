@@ -12,12 +12,15 @@
 using namespace std;
 
 class Trainer {
+    friend class Fight;
+
 private:
     static unsigned int ID_COUNTER;
 
+protected:
     const unsigned int id;
     const string name;
-    Pokemon* team[6];
+    vector<Pokemon*> team;
 public:
     Trainer(const string &name);
 

@@ -5,6 +5,8 @@
 #ifndef CPP_DUMP_TYPE_H
 #define CPP_DUMP_TYPE_H
 
+#include "../utils/CsvReader.h"
+
 using namespace std;
 
 enum Type {
@@ -91,5 +93,11 @@ inline string tToString(const Type &entry) {
             break;
     }
     return result;
+}
+
+inline float computeTypeEffectiveness(Type sender, Type target) {
+    CsvReader reader("../csv/types_compact.csv", ";", false);
+    auto data_list = reader.getData();
+    return stof(data_list[(unsigned int)(sender)][(unsigned int)(target)]) / 100;
 }
 #endif //CPP_DUMP_TYPE_H

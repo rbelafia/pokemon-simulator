@@ -25,6 +25,7 @@ using namespace std;
 class MoveEntry {
     friend class MoveDex;
     friend class PokemonEntry;
+    friend class Fight;
 
 public:
     static unsigned int ID_COUNTER;     //!< A counter to compute the id of a pokemon
